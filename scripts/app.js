@@ -36,7 +36,7 @@ angular.module('manifold',
 
       .when('/extras-login2', {
         controller: 'LoginController', // authentication module
-        templateUrl: 'views/index.html',
+        templateUrl: 'views//extras-login2',
       })
       .when('/code.html', {
         controller: 'CodeController',// authentication module
