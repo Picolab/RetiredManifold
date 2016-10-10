@@ -113,7 +113,7 @@ angular
       return $sce.trustAsHtml(val);
     };
   }]);
-  
+/*  
 angular.module('manifold.Services').service('SessionService', function(){
     var userIsAuthenticated = false;
 
@@ -125,3 +125,4 @@ angular.module('manifold.Services').service('SessionService', function(){
         return userIsAuthenticated;
     };
 });
+*/
