@@ -9,7 +9,9 @@ var manifold = angular
     [
     'Authentication',
     'theme',
-    'theme.demos'
+    'theme.demos',
+    'ngRoute',
+    'ngCookies'
   ]// dependencies manifold needs
   );
   
@@ -40,21 +42,27 @@ var manifold = angular
       })
 
       .when('/extras-login2', {
+        controller: 'LoginController', // authentication module
         templateUrl: 'views/index.html',
         requireLogin: false
       })
-
+      .when('/code.html', {
+        controller: 'CodeController',// authentication module
+        templateUrl: 'modules/authentication/views/code.html',
+        requireLogin: false
+      })
       .otherwise({
         redirectTo: '/'
       });
   }]);
 
 
-  manifold.run(function ($rootScope) {
+  manifold.run(['$rootScope', '$location', '$cookieStore', '$http',
+    function ($rootScope, $location, $cookieStore, $http) {
      $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and need to be authorize
             if (requireLogin && !wrangler.authenticatedSession()) {
                 $location.path('/extras-login2');
             }
         });
-});
+}]);
