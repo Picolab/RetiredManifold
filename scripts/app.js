@@ -36,11 +36,11 @@ angular.module('manifold',
 
       .when('/extras-login2', {
         controller: 'LoginController', // authentication module
-        templateUrl: 'views//extras-login2',
+        templateUrl: 'views/extras-login2',
       })
       .when('/code.html', {
         controller: 'CodeController',// authentication module
-        templateUrl: 'modules/authentication/views/code.html',
+        templateUrl: '/code.html',
       })
       .otherwise({
         redirectTo: '/'
