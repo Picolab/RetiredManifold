@@ -4,8 +4,7 @@
 // declare modules
 angular.module('Authentication', []);
 
-var app = angular
-  .module('manifold', 
+angular.module('manifold', 
     [
     'Authentication',
     'theme',
@@ -13,10 +12,7 @@ var app = angular
     'ngRoute',
     'ngCookies'
   ]// dependencies manifold needs
-  );
-  
-
-  app.config(['$provide', '$routeProvider', function($provide, $routeProvider) {
+  ).config(['$provide', '$routeProvider', function($provide, $routeProvider) {
 
     $routeProvider 
       .when('/', {
@@ -49,10 +45,8 @@ var app = angular
       .otherwise({
         redirectTo: '/'
       });
-  }]);
-
-
-  app.run(['$rootScope', '$location', '$cookieStore', '$http',
+  }])
+  .run(['$rootScope', '$location', '$cookieStore', '$http',
     function ($rootScope, $location, $cookieStore, $http) {
      $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and need to be authorize
