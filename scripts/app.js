@@ -4,7 +4,7 @@
 // declare modules
 angular.module('Authentication', []);
 
-var manifold = angular
+var app = angular
   .module('manifold', 
     [
     'Authentication',
@@ -16,7 +16,7 @@ var manifold = angular
   );
   
 
-  manifold.config(['$provide', '$routeProvider', function($provide, $routeProvider) {
+  app.config(['$provide', '$routeProvider', function($provide, $routeProvider) {
 
     $routeProvider 
       .when('/', {
@@ -52,11 +52,11 @@ var manifold = angular
   }]);
 
 
-  manifold.run(['$rootScope', '$location', '$cookieStore', '$http',
+  app.run(['$rootScope', '$location', '$cookieStore', '$http',
     function ($rootScope, $location, $cookieStore, $http) {
      $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and need to be authorize
-            if ($location.path() !== '/extras-login2' && !wrangler.authenticatedSession()) {
+            if ($location.path() !== '/extras-login2' && !manifold.authenticatedSession()) {
                 $location.path('/extras-login2');
             }
         });
