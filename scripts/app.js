@@ -7,9 +7,9 @@ angular.module('Authentication', []);
 var manifold = angular
   .module('manifold', 
     [
+    'Authentication',
     'theme',
-    'theme.demos',
-    'manifold.Services'
+    'theme.demos'
   ]// dependencies manifold needs
   );
   
