@@ -28,28 +28,23 @@ var manifold = angular
             ]);
           }]
         },
-        requireLogin: false
       })
       .when('/:templateFile', { // expects a parameter for this route
         templateUrl: function(param) {
           return 'views/' + param.templateFile + '.html';
         },
-        requireLogin: false
       })
       .when('#', {
         templateUrl: 'views/index.html',
-        requireLogin: false
       })
 
       .when('/extras-login2', {
         controller: 'LoginController', // authentication module
         templateUrl: 'views/index.html',
-        requireLogin: false
       })
       .when('/code.html', {
         controller: 'CodeController',// authentication module
         templateUrl: 'modules/authentication/views/code.html',
-        requireLogin: false
       })
       .otherwise({
         redirectTo: '/'
@@ -61,7 +56,7 @@ var manifold = angular
     function ($rootScope, $location, $cookieStore, $http) {
      $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and need to be authorize
-            if (requireLogin && !wrangler.authenticatedSession()) {
+            if ($location.path() !== '/extras-login2' && !wrangler.authenticatedSession()) {
                 $location.path('/extras-login2');
             }
         });
