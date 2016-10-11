@@ -4,7 +4,7 @@
 // declare modules
 angular.module('Authentication', []);
 
-angular.module('manifold', 
+angular.module('manifoldApp', 
     [
     'Authentication',
     'theme',
