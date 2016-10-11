@@ -19,9 +19,9 @@ angular.module('manifold',
         templateUrl: 'views/index.html',
         resolve: {
           loadCalendar: ['$ocLazyLoad', function($ocLazyLoad) {
-   //         return $ocLazyLoad.load([
-   //           'bower_components/fullcalendar/fullcalendar.js',
-   //         ]);
+            return $ocLazyLoad.load([
+              'bower_components/fullcalendar/fullcalendar.js',
+            ]);
           }]
         },
       })
