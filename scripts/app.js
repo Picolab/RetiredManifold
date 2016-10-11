@@ -4,7 +4,7 @@
 // declare modules
 angular.module('Authentication', []);
 
-angular.module('manifoldApp', 
+angular.module('manifold', 
     [
     'Authentication',
     'theme',
@@ -50,7 +50,7 @@ angular.module('manifoldApp',
     function ($rootScope, $location, $cookieStore, $http) {
      $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and need to be authorize
-            if ($location.path() !== '/extras-login2' && !manifold.authenticatedSession()) {
+            if ($location.path() !== '/extras-login2' && !manifoldAuth.authenticatedSession()) {
                 $location.path('/extras-login2');
             }
         });
