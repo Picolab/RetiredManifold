@@ -1,79 +1,79 @@
 ; (function()
 
 {
-    window.manifold = {};
+    window.manifoldAuth = {};
 
     // ------------------------------------------------------------------------
-    manifold.clientKey = "CE2C9E4A-85F9-11E6-884F-74B0E71C24E1";
-    //manifold.anonECI = "85255500-0b65-0130-243c-00163ebcdddd"; // used for login not authorization?
-    manifold.callbackURL = "https://burdettadam.github.io/manifold/code.html";
-    manifold.host = "kibdev.kobj.net"; // change to cs.kobj.net when in production
-    manifold.login_server = "kibdev.kobj.net"; // change to accounts.kobj.net when in production
-    //manifold.defaultECI = "none";
-    //manifold.access_token = "none";
+    manifoldAuth.clientKey = "CE2C9E4A-85F9-11E6-884F-74B0E71C24E1";
+    //manifoldAuth.anonECI = "85255500-0b65-0130-243c-00163ebcdddd"; // used for login not authorization?
+    manifoldAuth.callbackURL = "https://burdettadam.github.io/manifoldAuth/code.html";
+    manifoldAuth.host = "kibdev.kobj.net"; // change to cs.kobj.net when in production
+    manifoldAuth.login_server = "kibdev.kobj.net"; // change to accounts.kobj.net when in production
+    //manifoldAuth.defaultECI = "none";
+    //manifoldAuth.access_token = "none";
 
     // ========================================================================
     // OAuth functions
     // ========================================================================
 
     // ------------------------------------------------------------------------
-    manifold.getOAuthURL = function(fragment)
+    manifoldAuth.getOAuthURL = function(fragment)
     {
-        if (typeof manifold.login_server === "undefined") {
-            manifold.login_server = manifold.host;
+        if (typeof manifoldAuth.login_server === "undefined") {
+            manifoldAuth.login_server = manifoldAuth.host;
         }
         var client_state = Math.floor(Math.random() * 9999999);
-        var current_client_state = window.localStorage.getItem("manifold_CLIENT_STATE");
+        var current_client_state = window.localStorage.getItem("manifoldAuth_CLIENT_STATE");
         if (!current_client_state) {
-            window.localStorage.setItem("manifold_CLIENT_STATE", client_state.toString());
+            window.localStorage.setItem("manifoldAuth_CLIENT_STATE", client_state.toString());
         }
-        var url = 'https://' + manifold.login_server +
+        var url = 'https://' + manifoldAuth.login_server +
         '/oauth/authorize?response_type=code' +
-        '&redirect_uri=' + encodeURIComponent(manifold.callbackURL + (fragment || "")) +
-        '&client_id=' + manifold.clientKey +
+        '&redirect_uri=' + encodeURIComponent(manifoldAuth.callbackURL + (fragment || "")) +
+        '&client_id=' + manifoldAuth.clientKey +
         '&state=' + client_state;
 
         return (url)
     };
 
-    manifold.getOAuthNewAccountURL = function(fragment)
+    manifoldAuth.getOAuthNewAccountURL = function(fragment)
     {
-        if (typeof manifold.login_server === "undefined") {
-            manifold.login_server = manifold.host;
+        if (typeof manifoldAuth.login_server === "undefined") {
+            manifoldAuth.login_server = manifoldAuth.host;
         }
 
 
         var client_state = Math.floor(Math.random() * 9999999);
-        var current_client_state = window.localStorage.getItem("manifold_CLIENT_STATE");
+        var current_client_state = window.localStorage.getItem("manifoldAuth_CLIENT_STATE");
         if (!current_client_state) {
-            window.localStorage.setItem("manifold_CLIENT_STATE", client_state.toString());
+            window.localStorage.setItem("manifoldAuth_CLIENT_STATE", client_state.toString());
         }
-        var url = 'https://' + manifold.login_server +
+        var url = 'https://' + manifoldAuth.login_server +
         '/oauth/authorize/newuser?response_type=code' +
-        '&redirect_uri=' + encodeURIComponent(manifold.callbackURL + (fragment || "")) +
-        '&client_id=' + manifold.clientKey +
+        '&redirect_uri=' + encodeURIComponent(manifoldAuth.callbackURL + (fragment || "")) +
+        '&client_id=' + manifoldAuth.clientKey +
         '&state=' + client_state;
 
         return (url)
     };
 
     // ------------------------------------------------------------------------
-    manifold.getOAuthAccessToken = function(code, callback, error_func)
+    manifoldAuth.getOAuthAccessToken = function(code, callback, error_func)
     {
         var returned_state = parseInt(getQueryVariable("state"));
-        var expected_state = parseInt(window.localStorage.getItem("manifold_CLIENT_STATE"));
+        var expected_state = parseInt(window.localStorage.getItem("manifoldAuth_CLIENT_STATE"));
         if (returned_state !== expected_state) {
-            console.warn("OAuth Security Warning. Client states do not match. (Expected %d but got %d)", manifold.client_state, returned_state);
+            console.warn("OAuth Security Warning. Client states do not match. (Expected %d but got %d)", manifoldAuth.client_state, returned_state);
         }
         console.log("getting access token with code: ", code);
         if (typeof (callback) !== 'function') {
             callback = function() { };
         }
-        var url = 'https://' + manifold.login_server + '/oauth/access_token';
+        var url = 'https://' + manifoldAuth.login_server + '/oauth/access_token';
         var data = {
             "grant_type": "authorization_code",
-            "redirect_uri": manifold.callbackURL,
-            "client_id": manifold.clientKey,
+            "redirect_uri": manifoldAuth.callbackURL,
+            "client_id": manifoldAuth.clientKey,
             "code": code
         };
 
@@ -90,8 +90,8 @@
                     callback(json);
                     return;
                 };
-                manifold.saveSession(json);
-                window.localStorage.removeItem("manifold_CLIENT_STATE");
+                manifoldAuth.saveSession(json);
+                window.localStorage.removeItem("manifoldAuth_CLIENT_STATE");
                 callback(json);
             },
             error: function(json)
@@ -106,54 +106,54 @@
     // Session Management
 
     // ------------------------------------------------------------------------
-    manifold.retrieveSession = function()
+    manifoldAuth.retrieveSession = function()
     {
         var SessionCookie = kookie_retrieve();
 
         console.log("Retrieving session ", SessionCookie);
         if (SessionCookie != "undefined") {
-            manifold.defaultECI = SessionCookie;
+            manifoldAuth.defaultECI = SessionCookie;
         } else {
-            manifold.defaultECI = "none";
+            manifoldAuth.defaultECI = "none";
         }
-        return manifold.defaultECI;
+        return manifoldAuth.defaultECI;
     };
 
     // ------------------------------------------------------------------------
-    manifold.saveSession = function(token_json)
+    manifoldAuth.saveSession = function(token_json)
     {
        var Session_ECI = token_json.OAUTH_ECI;
        var access_token = token_json.access_token;
        console.log("Saving session for ", Session_ECI);
-       manifold.defaultECI = Session_ECI;
-       manifold.access_token = access_token;
+       manifoldAuth.defaultECI = Session_ECI;
+       manifoldAuth.access_token = access_token;
        kookie_create(Session_ECI);
    };
     // ------------------------------------------------------------------------
-    manifold.removeSession = function(hard_reset)
+    manifoldAuth.removeSession = function(hard_reset)
     {
-        console.log("Removing session ", manifold.defaultECI);
+        console.log("Removing session ", manifoldAuth.defaultECI);
         if (hard_reset) {
             var cache_breaker = Math.floor(Math.random() * 9999999);
-            var reset_url = 'https://' + manifold.login_server + "/login/logout?" + cache_breaker;
+            var reset_url = 'https://' + manifoldAuth.login_server + "/login/logout?" + cache_breaker;
             $.ajax({
                 type: 'POST',
                 url: reset_url,
-                headers: { 'Kobj-Session': manifold.defaultECI },
+                headers: { 'Kobj-Session': manifoldAuth.defaultECI },
                 success: function(json)
                 {
-                    console.log("Hard reset on " + manifold.login_server + " complete");
+                    console.log("Hard reset on " + manifoldAuth.login_server + " complete");
                 }
             });
         }
-        manifold.defaultECI = "none";
+        manifoldAuth.defaultECI = "none";
         kookie_delete();
     };
 
     // ------------------------------------------------------------------------
-    manifold.authenticatedSession = function()
+    manifoldAuth.authenticatedSession = function()
     {
-        var authd = manifold.defaultECI != "none";
+        var authd = manifoldAuth.defaultECI != "none";
         if (authd) {
             console.log("Authenicated session");
         } else {
@@ -164,7 +164,7 @@
 
     // exchange OAuth code for token
     // updated this to not need a query to be passed as it wasnt used in the first place.
-    manifold.retrieveOAuthCode = function()
+    manifoldAuth.retrieveOAuthCode = function()
     {
         var code = getQueryVariable("code");
         return (code) ? code : "NO_OAUTH_CODE";
@@ -184,7 +184,7 @@
         return false;
     };
 
-    manifold.clean = function(obj) {
+    manifoldAuth.clean = function(obj) {
        delete obj._type;
        delete obj._domain;
        delete obj._async;
@@ -240,17 +240,17 @@
     // ========================================================================
     // Login functions
     // ========================================================================
-    manifold.login = function(username, password, success, failure) {
+    manifoldAuth.login = function(username, password, success, failure) {
 
 
        var parameters = {"email": username, "pass": password};
 
-       if (typeof manifold.anonECI === "undefined") {
-           console.error("manifold.anonECI undefined. Configure manifold.js in manifold-config.js; failing...");
+       if (typeof manifoldAuth.anonECI === "undefined") {
+           console.error("manifoldAuth.anonECI undefined. Configure manifoldAuth.js in manifoldAuth-config.js; failing...");
            return null;
        }
 
-       return manifold.skyQuery("manifold",
+       return manifoldAuth.skyQuery("manifoldAuth",
         "cloudAuth", 
         parameters, 
         function(res){
@@ -259,7 +259,7 @@
                        var tokens = {"access_token": "none",
                        "OAUTH_ECI": res.token
                    };
-                   manifold.saveSession(tokens); 
+                   manifoldAuth.saveSession(tokens); 
                    if(typeof success == "function") {
                        success(tokens);
                    }
@@ -270,7 +270,7 @@
                    }
                }
            },
-           {eci: manifold.anonECI,
+           {eci: manifoldAuth.anonECI,
                errorFunc: failure
            }
            );
