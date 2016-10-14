@@ -25,12 +25,13 @@ angular.module('manifold',
           }]
         },
       })
-      .when('/:templateFile', { // expects a parameter for this route
+      /*.when('/:templateFile', { // expects a parameter for this route
         templateUrl: function(param) {
           return 'views/' + param.templateFile + '.html';
         },
-      })
+      })*/
       .when('#', {
+        controller: 'MainController', 
         templateUrl: 'views/index.html',
       })
 
