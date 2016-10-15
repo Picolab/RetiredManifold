@@ -41,7 +41,7 @@ angular.module('manifold',
       })
       .when('/code.html', {
         controller: 'CodeController',// authentication module
-        templateUrl: '/code.html',
+        templateUrl: 'views/extras-login2', //'/code.html',
       })
       .otherwise({
         redirectTo: '/'
