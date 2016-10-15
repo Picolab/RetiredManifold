@@ -5,12 +5,12 @@
 
     // ------------------------------------------------------------------------
     manifoldAuth.clientKey = "CE2C9E4A-85F9-11E6-884F-74B0E71C24E1";
-    //manifoldAuth.anonECI = "85255500-0b65-0130-243c-00163ebcdddd"; // used for login not authorization?
+    manifoldAuth.anonECI = "85255500-0b65-0130-243c-00163ebcdddd"; // used for login not authorization?
     manifoldAuth.callbackURL = "https://burdettadam.github.io/manifold/code.html";
     manifoldAuth.host = "kibdev.kobj.net"; // change to cs.kobj.net when in production
     manifoldAuth.login_server = "kibdev.kobj.net"; // change to accounts.kobj.net when in production
-    //manifoldAuth.defaultECI = "none";
-    //manifoldAuth.access_token = "none";
+    manifoldAuth.defaultECI = "none";
+    manifoldAuth.access_token = "none";
 
     // ========================================================================
     // OAuth functions
