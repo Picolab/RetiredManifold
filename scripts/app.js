@@ -25,11 +25,22 @@ angular.module('manifold',
           }]
         },
       })
-      /*.when('/:templateFile', { // expects a parameter for this route
+      .when('/code.html', {
+        controller: 'CodeController',// authentication module
+        templateUrl: 'views/index.html', //'/code.html',
+         resolve: {
+          loadCalendar: ['$ocLazyLoad', function($ocLazyLoad) {
+            return $ocLazyLoad.load([
+              'bower_components/fullcalendar/fullcalendar.js',
+            ]);
+          }]
+        },
+      })
+      .when('/:templateFile', { // expects a parameter for this route
         templateUrl: function(param) {
           return 'views/' + param.templateFile + '.html';
         },
-      })*/
+      })
       .when('#', {
         controller: 'MainController', 
         templateUrl: 'views/index.html',
@@ -39,10 +50,7 @@ angular.module('manifold',
         controller: 'LoginController', // authentication module
         templateUrl: 'views/extras-login2',
       })
-      .when('/code.html', {
-        controller: 'CodeController',// authentication module
-        templateUrl: 'views/index.html', //'/code.html',
-      })
+
       .otherwise({
         redirectTo: '/'
       });
