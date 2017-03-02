@@ -5,7 +5,7 @@ ruleset manifold_init {
 Primary ruleset for manifold owner pico
         >>
         author "PJW's PicoLabs"
-        use module b507901x1 alias Wrangler 
+        use module b507901x1 alias Wrangler // update to what ever version of wrangler your using.
 
         sharing on
         provides manifoldChannel
@@ -66,7 +66,7 @@ Primary ruleset for manifold owner pico
         always {
           raise wrangler event "add_prototype" 
             with prototype_name = '_manifold_proto'
-             and url = 'https://raw.githubusercontent.com/burdettadam/Practice-with-KRL/master/manifold/manifoldPrototype.json';// ----------------------------------------------needs url to prototype. ---------------------------------------------------------
+             and url = 'https://raw.githubusercontent.com/Picolab/manifold/gh-pages/KRL/manifoldPrototype.json';// ----------------------------------------------needs url to prototype. ---------------------------------------------------------
           raise wrangler event "child_creation" 
             with name = '_manifold'
              and prototype = '_manifold_proto';
