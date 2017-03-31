@@ -1,0 +1,106 @@
+<div id="page-heading">
+	<ol class="breadcrumb">
+		<li><a href="#/">Dashboard</a></li>
+		<li>UI Elements</li>
+		<li class="active">Panel</li>
+	</ol>
+
+	<h1>Things</h1>
+	<div class="options">
+        <div class="btn-toolbar">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                    Sort by <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Creation Date</a></li>
+                  <li><a href="#">Recent Notification</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-default hidden-xs"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class = "container-fluid">
+  <div class = "row">
+    <div class = "col-md-4" ng-drop = "true">
+      
+      <tabset panel-tabs="true" panel-class="panel-inverse" heading="My bicycle" ng-drag="true">
+	<tab heading="Journal">
+	  <p>Jan 20 2016: Purchased at Taylor's Bike Shop</p>
+          <p>Jul 25 2016: Semi-annual tune-up at Taylor's Bike Shop</p>
+	</tab>
+	<tab heading="Societies">
+	  <p>Home</p>
+	  <p>Transportation</p>
+	  <p>Valuables</p>
+	</tab>
+	<tab heading="Scheduled">
+	  <p>Jan 25 2016: tune-up reminder</p>
+	</tab>
+      </tabset>
+      
+      <tabset panel-tabs="true" panel-class="panel-inverse" heading="My iPhone 6" ng-drag="true">
+	<tab heading="Journal">
+	  <p>Feb 1 2016: Purchased at Apple Store</p>
+	</tab>
+	<tab heading="Societies">
+	  <p>Home</p>
+	  <p>Electronics</p>
+	  <p>Valuables</p>
+	</tab>
+	<tab heading="Apps">
+	  <p><a href = "#/">Locate</a></p>
+	</tab>
+      </tabset>
+
+    </div><!-- end div class "col-md-4" (first column of panels) -->
+    <div class = "col-md-4" ng-drop = "true">
+      
+      <tabset panel-tabs="true" panel-class="panel-inverse" heading="Furnace" ng-drag="true">
+	<tab heading="Journal">
+	  <p>Jan 20 2016: Replaced filter</p>
+          <p>Mar 14 2016: Replaced filter</p>
+          <p>Sep 17 2016: Replaced filter</p>
+	</tab>
+	<tab heading="Societies">
+	  <p>Home</p>
+	</tab>
+	<tab heading="Apps">
+	  <p><a href = "#/">Purchase filters (Amazon)</a></p>
+	</tab>
+      </tabset>
+
+    </div><!-- end div class "col-md-4" (second column of panels) -->
+    <div class = "col-md-4" ng-drop = "true">
+      
+      <tabset panel-tabs="true" panel-class="panel-inverse" heading="Speaker System" ng-drag="true">
+	<tab heading="Journal">
+	  <p>Sep 21 2016: Purchased at Best Buy</p>
+	</tab>
+	<tab heading="Societies">
+	  <p>Home</p>
+	  <p>Electronics</p>
+	  <p>Valuables</p>
+	</tab>
+	<tab heading="Apps">
+	  <p><a href = "#/">Turn on</a></p>
+	  <p><a href = "#/">Turn off</a></p>
+	  <p><a href = "#/">Mute</a></p>
+	</tab>
+      </tabset>
+
+    </div><!-- end div class "col-md-4" (third column of panels) -->
+  
+  </div><!-- end div class "row" -->
+</div><!-- end div class "container-fluid" -->
+
