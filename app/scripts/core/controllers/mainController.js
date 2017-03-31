@@ -199,12 +199,12 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
 
     // there are better ways to do this, e.g. using a dedicated service
     // but for the purposes of this demo this will do :P
-    $scope.isLoggedIn = true;
+    $scope.isLoggedIn = false;
     $scope.logOut = function() {
       $scope.isLoggedIn = false;
     };
     $scope.logIn = function() {
-      $scope.isLoggedIn = true;
+      $scope.isLoggedIn = $window.sessionStorage.token;
     };
 
     $scope.rightbarAccordionsShowOne = false;

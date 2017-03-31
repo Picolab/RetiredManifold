@@ -7,9 +7,18 @@ angular
       iconClasses: '',
       separator: true
     }, {
+       label: 'Spimes',
+       iconClasses: 'glyphicon glyphicon-cog',
+       url: '#/',
+       html: '<span class="label label-danger">HOT</span>'
+     },  {
+       label: 'Societies',
+       iconClasses: 'glyphicon glyphicon-cog',
+       url: '#/societies'
+     }, {
       label: 'Dashboard',
       iconClasses: 'glyphicon glyphicon-home',
-      url: '#/'
+      url: '#/dashboard'
     }, {
       label: 'Layouts',
       iconClasses: 'glyphicon glyphicon-th-list',
