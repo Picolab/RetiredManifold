@@ -7,22 +7,22 @@ angular
       iconClasses: '',
       separator: true
     }, {
-      label: 'Spimes',
+      label: 'Things',
       iconClasses: 'glyphicon glyphicon-cog',
       url: '#/',
-      html: '<span class="label label-danger">HOT</span>'
-    },  {
-      label: 'Societies',
+/*      html: '<span class="label label-danger">HOT</span>'*/
+    }, {
+      label: 'Communities',
       iconClasses: 'glyphicon glyphicon-cog',
-      url: '#/societies'
+      url: '#/communities'
+    }, {
+      label: 'Locations',
+      iconClasses: 'glyphicon glyphicon-cog',
+      url: '#/locations'
     }, {
       label: 'Dashboard',
       iconClasses: 'glyphicon glyphicon-home',
       url: '#/dashboard'
-    }, {
-      label: 'Bonus Apps',
-      iconClasses: '',
-      separator: true
     }, {
       label: 'Tasks',
       iconClasses: 'glyphicon glyphicon-ok',
