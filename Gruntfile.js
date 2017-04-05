@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      dist: '../manifold-gh-pages'
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -309,9 +309,14 @@ module.exports = function (grunt) {
             'bower_components/stepy/lib/jquery.stepy.js',
             'bower_components/Chart.js/Chart.min.js',
             'bower_components/raphael/raphael.js',
-            'bower_components/morris.js/morris.js',
-            'bower_components/fullcalendar/fullcalendar.js'
+            'bower_components/morris.js/morris.js'//,
+            //'bower_components/fullcalendar/fullcalendar.js'
           ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>/assets/',
+          src: ['../bower_components/fullcalendar/fullcalendar.js']
         }, {
           expand: true,
           cwd: '.tmp/images',
@@ -322,7 +327,7 @@ module.exports = function (grunt) {
           flatten: true,
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>/assets/fonts',
-          src: ['bower_components/font-awesome/fonts/*']
+          src: ['../bower_components/font-awesome/fonts/*']
         }]
       },
       fonts: {
@@ -330,7 +335,7 @@ module.exports = function (grunt) {
         flatten: true,
         cwd: '<%= yeoman.app %>',
         dest: '<%= yeoman.dist %>/assets/fonts',
-        src: 'bower_components/font-awesome/fonts/*'
+        src: '../bower_components/font-awesome/fonts/*'
       },
       styles: {
         expand: true,
