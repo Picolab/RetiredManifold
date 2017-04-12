@@ -47,8 +47,8 @@ angular.module('manifold',
     function ($rootScope, $location, $cookieStore, $http) {
      $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and need to be authorize
-         //   if (($location.path() !== '/extras-login2' || $location.path() !== '/') && !manifoldAuth.authenticatedSession()) {
-         //       $location.path('/extras-login2');
-         //   }
+        if ($location.path() != '/code'  && !manifoldAuth.authenticatedSession()){
+           $location.path('/extras-login2');
+        } 
         });
 }]);

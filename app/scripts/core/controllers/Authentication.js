@@ -25,14 +25,16 @@ app.controller('CodeController',
       if (!oauth_payload.OAUTH_ECI) {
         alert("Authentication failed. We apologize for this inconvenience. Please try again.");
       } else {
-             console.log("Authorized");            // display authorization 
+             console.log("Authorized");
+             $location.path('/'); // redirect to index
+             $location.search('code', null); // remove code parameter 
+             $location.search('state', null); // remove state parameter 
+             $scope.$apply() // updated the scope of our changes 
             /// Devtools.initAccount({}, function(kns_directives){ // bootstraps
             //  console.log("Received directives from bootstrap.execute: ", kns_directives);
             //  $.mobile.loading("hide");
            //   window.location = "index.html";
            // });
-            $location.url('/')
-             //window.location = "index.html";
            }
          },
          function(json){
