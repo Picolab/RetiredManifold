@@ -10,5 +10,3 @@ bower_components
 npm-debug.log
 
 Gruntfile.js
-
-app/scripts/auth-config.js
