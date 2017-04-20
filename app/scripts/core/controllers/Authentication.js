@@ -7,9 +7,14 @@ app.controller('LoginController',
     ['$scope', '$rootScope', '$location', 'AuthenticationService','$window','$cookies',
     function ($scope, $rootScope, $location, AuthenticationService,$window,$cookies) {
         console.log("document ready");
-        manifoldAuth.retrieveSession($cookies);
+        //manifoldAuth.retrieveSession($cookies);
         // only put static stuff here...
         AuthenticationService.plant_authorize_button();
+        $scope.removeSession = function(clickEvent) {
+            console.log("removing session");
+            manifoldAuth.removeSession(true,$cookies); // true for hard reset (log out of login server too)
+            window.open("https://" + manifoldAuth.login_server + "/login/logout?" + Math.floor(Math.random() * 9999999), "_blank");
+        };
     }]);
 
 

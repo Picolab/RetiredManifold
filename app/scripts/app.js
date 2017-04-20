@@ -43,12 +43,15 @@ angular.module('manifold',
         redirectTo: '/'
       });
   }])
-  .run(['$rootScope', '$location', '$cookieStore', '$http',
-    function ($rootScope, $location, $cookieStore, $http) {
+  .run(['$rootScope', '$location', '$cookies', '$http',
+    function ($rootScope, $location, $cookies, $http) {
      $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and need to be authorize
-        if ($location.path() != '/code'  && !manifoldAuth.authenticatedSession()){
-           $location.path('/extras-login2');
+        if ($location.path() != '/code'){
+          manifoldAuth.retrieveSession($cookies);
+          if (!manifoldAuth.authenticatedSession()){
+            $location.path('/extras-login2');
+          }
         } 
         });
 }]);

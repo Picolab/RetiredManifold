@@ -2,13 +2,15 @@
 	
 	<div class="panel panel-primary" ng-controller="LoginController">
 		<div class="panel-body">
-			<h4 class="text-center" style="margin-bottom: 25px;">Welcome Please Authorize Manifold!</h4>
+			<h4 class="text-center" style="margin-bottom: 25px;">Welcome to Manifold.</h4>
 			
   			<a id="authorize-link" href="#" data-transition="slide" class="ui-btn ui-corner-all ui-btn-b ui-shadow ui-btn-inline">Authorize with Kynetx</a> <br>
 
   			<a id="create-link" href="#" data-transition="slide" class="ui-btn ui-corner-all ui-btn-a ui-shadow ui-btn-inline">Create Kynetx Account</a> <br>
-  
+
   			<a id="account-link" href="#" data-transition="slide" class="ui-btn ui-corner-all ui-btn-a ui-shadow ui-btn-inline">My Kynetx Profile</a> <br>
 
+  			<a id="logout-link" data-transition="slide" class="ui-btn ui-corner-all ui-btn-a ui-shadow ui-btn-inline" ng-click="removeSession($event)">Log Out</a> <br>
+                </div>
 	</div>
  </div>
