@@ -1,6 +1,6 @@
 angular.module('theme.core.main_controller', ['theme.core.services'])
-  .controller('MainController', ['$scope', '$theme', '$timeout', 'progressLoader', '$location',
-    function($scope, $theme, $timeout, progressLoader, $location) {
+  .controller('MainController', ['$scope', '$theme', '$timeout', 'progressLoader', '$location', '$cookies',
+    function($scope, $theme, $timeout, progressLoader, $location, $cookies) {
     'use strict';
     // $scope.layoutIsSmallScreen = false;
     $scope.layoutFixedHeader = $theme.get('fixedHeader');
@@ -196,15 +196,11 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
     $scope.$on('themeEvent:changed:layoutBoxed', function(event, newVal) {
       $scope.layoutLayoutBoxed = newVal;
     });
-
-    // there are better ways to do this, e.g. using a dedicated service
-    // but for the purposes of this demo this will do :P
-    $scope.isLoggedIn = false;
-    $scope.logOut = function() {
-      $scope.isLoggedIn = false;
-    };
-    $scope.logIn = function() {
-      $scope.isLoggedIn = $window.sessionStorage.token;
+    
+    $scope.removeSession = function(clickEvent) {
+      console.log("removing session");
+      manifoldAuth.removeSession(true,$cookies); // true for hard reset (log out of login server too)
+      $location.path('/extras-login2');
     };
 
     $scope.rightbarAccordionsShowOne = false;
