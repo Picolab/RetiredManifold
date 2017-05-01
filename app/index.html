@@ -160,6 +160,18 @@
 
 	<div ng-include="'views/layout/infobar.html'" class="infobar-wrapper"></div>
 
+	<script type="text/ng-template" id="addModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">This is a modal!</h3>
+    </div>
+    <div class="modal-body">
+    	Modal content goes here
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="close()">Cancel</button>
+    </div>
+</script>
+
 	<!--[if lt IE 9]>
 	<script src="bower_components/es5-shim/es5-shim.js"></script>
 	<script src="bower_components/json3/lib/json3.min.js"></script>
@@ -337,6 +349,7 @@
 	<script src="scripts/core/services/AuthenticationService.js"></script>
 	<script src="scripts/core/directives/manifoldAuth.js"></script>
 	<script src="scripts/auth-config.js"></script>
+	<script src="scripts/core/controllers/manifold-api.js"></script>
 	  <!-- endbuild -->
 </body>
 </html>

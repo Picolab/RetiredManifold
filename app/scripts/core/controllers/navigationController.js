@@ -7,14 +7,14 @@ angular
       iconClasses: '',
       separator: true
     }, {
-       label: 'Spimes',
+       label: 'Things',
        iconClasses: 'glyphicon glyphicon-cog',
        url: '#/',
        html: '<span class="label label-danger">HOT</span>'
      },  {
-       label: 'Societies',
+       label: 'Communities',
        iconClasses: 'glyphicon glyphicon-cog',
-       url: '#/societies'
+       url: '#/communities'
      }, {
       label: 'Dashboard',
       iconClasses: 'glyphicon glyphicon-home',
@@ -41,7 +41,7 @@ angular
       iconClasses: '',
       separator: true
     }, {
-      label: 'Email',
+      label: 'Notifications',
       iconClasses: 'glyphicon glyphicon-inbox',
       html: '<span class="badge badge-indigo">3</span>',
       children: [{
@@ -54,7 +54,7 @@ angular
         label: 'Read',
         url: '#/read-mail'
       }, {
-        label: 'Email Templates',
+        label: 'Notifications Templates',
         url: '#/extras-email-templates'
       }]
     }, {

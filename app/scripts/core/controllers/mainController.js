@@ -1,6 +1,6 @@
 angular.module('theme.core.main_controller', ['theme.core.services'])
-  .controller('MainController', ['$scope', '$theme', '$timeout', 'progressLoader', '$location',
-    function($scope, $theme, $timeout, progressLoader, $location) {
+  .controller('MainController', ['$scope', '$theme', '$timeout', 'progressLoader', '$location', '$modal',
+    function($scope, $theme, $timeout, progressLoader, $location, $modal) {
     'use strict';
     // $scope.layoutIsSmallScreen = false;
     $scope.layoutFixedHeader = $theme.get('fixedHeader');
@@ -44,6 +44,24 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
     $scope.getLayoutOption = function(key) {
       return $theme.get(key);
     };
+
+    $scope.openAddModal = function(size) {
+      $modal.open({
+        templateUrl: 'addModal.html',
+        controller: function($scope, $modalInstance) {
+          $scope.close = function () {
+            $modalInstance.dismiss('cancel'); 
+          };
+          $scope.add = function() {
+            //create a new "Thing"
+            $modalInstance.dismiss('cancel'); 
+          };
+        },
+        size: size,
+      });
+    };
+
+
 
     $scope.setNavbarClass = function(classname, $event) {
       $event.preventDefault();
