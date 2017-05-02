@@ -11,3 +11,4 @@ bower_components
 npm-debug.log
 
 Gruntfile.js
+/nbproject/private/

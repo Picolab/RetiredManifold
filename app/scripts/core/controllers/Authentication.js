@@ -4,10 +4,10 @@
 var app = angular.module('Authentication');
 
 app.controller('LoginController',
-    ['$scope', '$rootScope', '$location', 'AuthenticationService','$window','$cookies',
-    function ($scope, $rootScope, $location, AuthenticationService,$window,$cookies) {
+    ['$scope', '$rootScope', '$location', 'AuthenticationService', '$window', '$cookies',
+    function ($scope, $rootScope, $location, AuthenticationService, $window, $cookies) {
         console.log("document ready");
-        manifoldAuth.retrieveSession($cookies);
+        //manifoldAuth.retrieveSession($cookies);
         // only put static stuff here...
         AuthenticationService.plant_authorize_button();
     }]);

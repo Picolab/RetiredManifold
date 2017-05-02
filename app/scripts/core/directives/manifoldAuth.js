@@ -107,7 +107,7 @@
         var TokenValue = $cookies.__SkySessionToken;
 
         console.log("Retrieving session ", TokenValue);
-        if (TokenValue != "undefined") {
+        if (typeof TokenValue !== "undefined") {
             manifoldAuth.defaultECI = TokenValue;
         } else {
             manifoldAuth.defaultECI = "none";
@@ -144,8 +144,8 @@
             });
         }
         manifoldAuth.defaultECI = "none";
-        $cookies.remove("__SkySessionToken");
-        $cookies.remove("access_token");
+        delete $cookies.__SkySessionToken;
+        delete $cookies.access_token;
     };
 
     // ------------------------------------------------------------------------
