@@ -61,6 +61,21 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
       });
     };
 
+    $scope.openCommModal = function(size) {
+      $modal.open({
+        templateUrl: 'commModal.html',
+        controller: function($scope, $modalInstance) {
+          $scope.close = function () {
+            $modalInstance.dismiss('cancel'); 
+          };
+          $scope.add = function() {
+            //create a new "Thing"
+            $modalInstance.dismiss('cancel'); 
+          };
+        },
+        size: size,
+      });
+    };
 
 
     $scope.setNavbarClass = function(classname, $event) {
