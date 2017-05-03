@@ -87,6 +87,7 @@
                     return;
                 };
                 manifoldAuth.saveSession(json,$cookies);
+                wrangler.saveSession(json);
                 window.localStorage.removeItem("manifoldAuth_CLIENT_STATE");
                 callback(json);
             },
@@ -109,6 +110,7 @@
         console.log("Retrieving session ", TokenValue);
         if (typeof TokenValue !== "undefined") {
             manifoldAuth.defaultECI = TokenValue;
+            wrangler.defaultECI = TokenValue;
         } else {
             manifoldAuth.defaultECI = "none";
         }

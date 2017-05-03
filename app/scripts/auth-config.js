@@ -13,3 +13,6 @@
     manifoldAuth.login_server = "kibdev.kobj.net"; // change to accounts.kobj.net when in production
     manifoldAuth.defaultECI = "none";
     manifoldAuth.access_token = "none";
+    wrangler.eventPath = "sky/event";
+    wrangler.functionPath = "sky/cloud";
+    wrangler.host = "kibdev.kobj.net";

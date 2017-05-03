@@ -84,8 +84,8 @@
      try {
 
        options = options || {};
-       options.eci = options.eci || PicoNavigator.currentPico || wrangler.defaultECI; //<-- is this vallid?
-
+       //options.eci = options.eci || PicoNavigator.currentPico || wrangler.defaultECI; //<-- is this vallid?
+       options.eci = options.eci || wrangler.defaultECI; //<-- is this vallid?
        callback = callback || function(){};
 
        var eci = check_eci(options.eci);
