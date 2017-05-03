@@ -53,16 +53,19 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
             $modalInstance.dismiss('cancel'); 
           };
           $scope.add = function() {
-            if($scope.name !== null && $scope.name !== ""){
+            console.log("name",$scope.name);
+            if($scope.name !== undefined && $scope.name !== ""){
               //create a new "Thing"
               //optional to put parent_eci in the "options" attribute, but the createSpime function will default to the wrangler.defaultECI, 
               //which is saved upon authentication and the function call saveSession
               var parent_eci = manifoldAuth.defaultECI;
-              var eventAttrs = {'name': $scope.name};
-              console.log(eventAttrs);
-              wrangler.createChild(eventAttrs);
+              //var eventAttrs = {'name': $scope.name};
+              //wrangler.createChild(eventAttrs);
+              manifold.createThing($scope.name);
+              $modalInstance.dismiss('cancel'); 
+            }else{
+              alert("No name!");
             }
-            $modalInstance.dismiss('cancel'); 
           };
         },
         size: size,

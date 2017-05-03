@@ -1,15 +1,15 @@
 ; (function() {
 
-	window.Manifold = {},
+	window.manifold = {};
 	
 
-	Manifold.createThing: function(name, postFunction, options)
+	manifold.createThing = function(name, postFunction, options)
 	{
 		var eventAttrs = { "name": name};
 		wrangler.createChild(eventAttrs,postFunction,options);//postFunction and options may be undefined
 	};
 
-	Manifold.getThings: function()
+	manifold.getThings = function()
 	{
 		return wrangler.children();
 	}
