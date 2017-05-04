@@ -123,7 +123,9 @@
       //put options stuff here.
     	try {
           options = options || {};
-          options.eci = options.eci || PicoNavigator.currentPico || wrangler.defaultECI; //<-- is this vallid?
+          //options.eci = options.eci || PicoNavigator.currentPico || wrangler.defaultECI; //<-- is this vallid?
+          options.eci = options.eci || wrangler.defaultECI; //<-- is this vallid?
+          parameters = parameters || {};
           var retries = 2;
 
           if (typeof options.repeats !== "undefined") {
@@ -132,7 +134,8 @@
                 throw "terminating repeating request due to consistent failure.";
             }
         }
-
+        console.log("wranglerECI", wrangler.defaultECI);
+        console.log("manifoldAuthECI", manifoldAuth.defaultECI);
         var eci = check_eci(options.eci);
         //url constructor
         var esl = mkEsl(

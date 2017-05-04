@@ -155,7 +155,7 @@
     {
         var authd = manifoldAuth.defaultECI != "none";
         if (authd) {
-            console.log("Authenicated session");
+            console.log("Authenticated session");
         } else {
             console.log("No authenicated session");
         }

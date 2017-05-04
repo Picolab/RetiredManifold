@@ -2,6 +2,16 @@ angular
   .module('theme.core.navigation_controller', ['theme.core.services'])
   .controller('NavigationController', ['$scope', '$location', '$timeout', function($scope, $location, $timeout) {
     'use strict';
+     if(manifoldAuth.authenticatedSession()){
+      var thingsCallback = function(thingsResult){
+        $scope.$apply(function(){
+          $scope.things = thingsResult;
+        });
+        console.log("$scope.things", $scope.things);
+      }
+      manifold.getThings(thingsCallback);
+       //$scope.things = [{'name': "thing1"}, {'name': "thing2"}];
+     }
     $scope.menu = [{
       label: 'Overview',
       iconClasses: '',
@@ -49,7 +59,7 @@ angular
         label: 'Read',
         url: '#/read-mail'
       }, {
-        label: 'Email Templates',
+        label: 'Notifications Templates',
         url: '#/extras-email-templates'
       }]
     }, {

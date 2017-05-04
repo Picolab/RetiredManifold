@@ -62,11 +62,11 @@
 
 
 
-<div class = "container-fluid">
+<div class = "container-fluid" ng-controller="NavigationController">
   <div class = "row">
     <div class = "col-md-4" ng-drop = "true">
       
-      <tabset panel-tabs="true" panel-class="panel-inverse" heading="My bicycle" ng-drag="true">
+      <tabset ng-repeat="thing in things" panel-tabs="true" panel-class="panel-inverse" heading={{thing.name}} ng-drag="true">
 	<tab heading="Journal">
 	  <p>Jan 20 2016: Purchased at Taylor's Bike Shop</p>
           <p>Jul 25 2016: Semi-annual tune-up at Taylor's Bike Shop</p>
