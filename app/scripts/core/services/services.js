@@ -70,6 +70,31 @@ angular
 
     return $window.bootbox;
   }])
+  .service('updateThingList', function(){
+    'use strict';
+
+    this.update = function(callback, newThing){
+
+      var checkExistence = function(){
+      if(sessionStorage.getItem('things') !== undefined && sessionStorage.getItem('things') !== null){
+        return true;
+        }
+        return false;
+      }
+
+      if(checkExistence()){
+        var theList = $.parseJSON(sessionStorage.getItem('things'));
+        if(typeof newThing === "object"){//if provided with an object, go ahead and push it/save it
+          theList.push(newThing);
+          sessionStorage.setItem('things', JSON.stringify(theList));
+        }
+        //now assign the value in the controller to this value
+        callback(theList);
+      }else{//perform an ajax call to get the info from the server
+        manifold.getThings(callback);
+      }
+    }
+  })
   .service('lazyLoad', ['$q', '$timeout', function($q, $t) {
     'use strict';
     var deferred = $q.defer();
