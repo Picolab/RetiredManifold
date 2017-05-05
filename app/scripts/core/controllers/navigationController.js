@@ -1,22 +1,10 @@
 angular
   .module('theme.core.navigation_controller', ['theme.core.services'])
-  .controller('NavigationController', ['$scope', '$location', '$timeout', 'updateThingList', function($scope, $location, $timeout, updateThingList) {
+  .controller('NavigationController', ['$scope', '$location', '$timeout', 'thingsList', function($scope, $location, $timeout, thingsList) {
     'use strict';
-     if(manifoldAuth.authenticatedSession()){
-      var nonAsyncCallback = function(thingsResult){
-        $scope.things = thingsResult;
-      }
-      var thingsCallback = function(thingsResult){
-        $scope.$apply(function(){
-          $scope.things = thingsResult;
-        });
-        console.log("$scope.things", $scope.things);
-      }
-      manifold.updateSession(thingsCallback,nonAsyncCallback);
-      //manifold.getThings(thingsCallback);
-      //console.log(updateThingList.update);
-      //updateThingList.update(thingsCallback);
-     }
+
+    
+
     $scope.menu = [{
       label: 'Overview',
       iconClasses: '',

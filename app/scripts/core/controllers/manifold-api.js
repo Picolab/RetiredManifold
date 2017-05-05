@@ -3,11 +3,14 @@
 	window.manifold = {};
 	
 
-	manifold.createThing = function(name, postFunction, options)
+	manifold.createThing = function(name, callback)
 	{
 		if(typeof name === "string"){
 			var eventAttrs = { 'name': name};
-			wrangler.createChild(eventAttrs,postFunction,options);//postFunction and options may be undefined
+			var updateCallback = function(){
+				manifold.updateSession(callback,true);//force refresh
+			}
+			wrangler.createChild(eventAttrs,updateCallback);
 		}else{
 			console.error("Attribute \"name\" is not a string!");
 		}
@@ -37,35 +40,45 @@
 			}
 			console.log("Things", things);
 			sessionStorage.setItem('things', JSON.stringify(things));
-			callback(things);
+			if(callback !== undefined){
+				callback(things);
+			}
 		}
 		wrangler.children(null,getThingsCallback);
 	};
 
-	/**
-	* @param asyncCallback a function that uses $scope.$apply when setting a $scope variable. This is the callback passed 
-	*  		 in when an ajax call is made to the server to retrieve information
-	* @param updateFunction a function the does not use $scope.$apply when setting the same $scope variable. This 
-	*		 function avoids the "$digest already in progress" error
-	*/
-	manifold.updateSession = function(asyncCallback, updateFunction, newThing){
-		var checkExistence = function(){
+	manifold.updateSession = function(optionalCallback, override){
+		if(override === undefined){
+			override = false;
+		}
+
+		var isCached = function(){
       		if(sessionStorage.getItem('things') !== undefined && sessionStorage.getItem('things') !== null){
         		return true;
         	}
         	return false;
       	}
 
-      	if(checkExistence()){
-        	var theList = $.parseJSON(sessionStorage.getItem('things'));
-        	if(typeof newThing === "object"){//if provided with an object, go ahead and push it/save it
-          		theList.push(newThing);
-          		sessionStorage.setItem('things', JSON.stringify(theList));
-        	}
-        	//now assign the value in the controller to this value
-        	updateFunction(theList);//dont use the async function... we need to avoid $scope.$apply
-      	}else{//perform an ajax call to get the info from the server
-        	manifold.getThings(asyncCallback);
+      	var setSessionStorage = function(result){
+      		sessionStorage.setItem('things', JSON.stringify(result));
+      		if(optionalCallback !== undefined && optionalCallback !== null){
+      			if(typeof optionalCallback === "function"){
+      				optionalCallback();
+      			}else{
+      				console.error("Invalid optionalCallback.");
+      			}
+      		}
+      		console.log("Result in setSessionStorage", result);
+      	}
+
+      	if(typeof override === "boolean"){
+      		if(!isCached()){//if not cached, go get info from the server
+        		manifold.getThings(setSessionStorage);
+      		}else if(override){//override can force a refresh
+      			manifold.getThings(setSessionStorage);
+      		}
+      	}else{
+      		console.error("Invalid \"override\" parameter");
       	}
 	};
 })();

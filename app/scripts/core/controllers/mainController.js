@@ -1,6 +1,6 @@
 angular.module('theme.core.main_controller', ['theme.core.services'])
-  .controller('MainController', ['$scope', '$theme', '$timeout', 'progressLoader', '$location', '$modal', '$cookies',
-    function($scope, $theme, $timeout, progressLoader, $location, $modal, $cookies) {
+  .controller('MainController', ['$scope', '$theme', '$timeout', 'progressLoader', '$location', '$modal', '$cookies', 'thingsList',
+    function($scope, $theme, $timeout, progressLoader, $location, $modal, $cookies, thingsList) {
     'use strict';
     // $scope.layoutIsSmallScreen = false;
     $scope.layoutFixedHeader = $theme.get('fixedHeader');
@@ -41,6 +41,29 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
 
     $scope.layoutLoading = true;
 
+    $scope.things = thingsList.getThings();
+
+    $scope.thingsList = thingsList;//necessary for the watch
+    $scope.$watch('thingsList.getThings()', function(newValue){//detect when the value in the service changes
+      $scope.things = newValue;
+    });
+
+    $scope.storageWatcher = sessionStorage;//necessary for the watch
+    $scope.$watch('storageWatcher.getItem(\'things\')', function(newValue){//detect changes in the session storage
+      thingsList.updateThings();
+      console.log("Got here!");
+    });
+
+    var asyncCallback = function(){//this callback ensures the "thing" objects appear when first authorized and when things are added
+        $scope.$apply(function(){
+          $scope.things = thingsList.getThings();
+        });
+      }
+
+     if(manifoldAuth.authenticatedSession()){
+      manifold.updateSession(asyncCallback);
+     }
+
     $scope.getLayoutOption = function(key) {
       return $theme.get(key);
     };
@@ -55,7 +78,7 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
           $scope.add = function() {
             console.log("name",$scope.name);
             if($scope.name !== undefined && $scope.name !== ""){
-              manifold.createThing($scope.name);
+              manifold.createThing($scope.name, asyncCallback);
               $modalInstance.dismiss('cancel'); 
             }else{
               alert("No name!");
