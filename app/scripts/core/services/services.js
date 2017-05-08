@@ -70,6 +70,17 @@ angular
 
     return $window.bootbox;
   }])
+  .filter('splitIntoColumns',function(){
+    return function(input, columnNum, totalColumns){
+      var toReturn = [];
+      if(input.length !== 0){
+        for(var i = columnNum; i < input.length; i += totalColumns){
+          toReturn.push(input[i]);
+        }
+      }
+      return toReturn;
+    };
+  })
   .factory('thingsList', function(){
     'use strict';
     var things = [];

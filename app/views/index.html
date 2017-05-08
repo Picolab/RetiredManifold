@@ -64,25 +64,58 @@
 
 <div class = "container-fluid" ng-controller="MainController">
   <div class = "row">
-    <div class = "col-md-4" ng-drop = "true" ng-repeat="thing in things">
+    <div class = "col-md-4" ng-drop = "true"><!-- 0 for column 0, 3 total columns -->
       
-      <tabset  panel-tabs="true" panel-class="panel-inverse" heading={{thing.name}} ng-drag="true">
-	<tab heading="Info">
-	  <p>ECI: {{thing.eci}}</p>
-          <p>More info: ...</p>
-	</tab>
-	<tab heading="Communities">
-	  <p>Home</p>
-	  <p>Transportation</p>
-	  <p>Valuables</p>
-	</tab>
-	<tab heading="Journal">
-	  <p>Jan 25 2016: tune-up reminder</p>
-	</tab>
+      <tabset  panel-tabs="true" panel-class="panel-inverse" heading={{thing.name}} ng-drag="true" ng-repeat="thing in things | splitIntoColumns:0:3">
+	       <tab heading="Info">
+            <p>ECI: {{thing.eci}}</p>
+            <p>More info: ...</p>
+	       </tab>
+	       <tab heading="Communities">
+	         <p>Home</p>
+	         <p>Transportation</p>
+	         <p>Valuables</p>
+	       </tab>
+	       <tab heading="Journal">
+	         <p>Jan 25 2016: tune-up reminder</p>
+	       </tab>
       </tabset>
 
     </div><!-- end div class "col-md-4" (first column of panels) -->
-  
+
+    <div class = "col-md-4" ng-drop = "true">
+      <tabset  panel-tabs="true" panel-class="panel-inverse" heading={{thing.name}} ng-drag="true"  ng-repeat="thing in things | splitIntoColumns:1:3">
+         <tab heading="Info">
+            <p>ECI: {{thing.eci}}</p>
+            <p>More info: ...</p>
+         </tab>
+         <tab heading="Communities">
+           <p>Home</p>
+           <p>Transportation</p>
+           <p>Valuables</p>
+         </tab>
+         <tab heading="Journal">
+           <p>Jan 25 2016: tune-up reminder</p>
+         </tab>
+      </tabset>
+    </div>
+
+    <div class = "col-md-4" ng-drop = "true">
+      <tabset  panel-tabs="true" panel-class="panel-inverse" heading={{thing.name}} ng-drag="true"  ng-repeat="thing in things | splitIntoColumns:2:3">
+         <tab heading="Info">
+            <p>ECI: {{thing.eci}}</p>
+            <p>More info: ...</p>
+         </tab>
+         <tab heading="Communities">
+           <p>Home</p>
+           <p>Transportation</p>
+           <p>Valuables</p>
+         </tab>
+         <tab heading="Journal">
+           <p>Jan 25 2016: tune-up reminder</p>
+         </tab>
+      </tabset>
+    </div>
   </div><!-- end div class "row" -->
 </div><!-- end div class "container-fluid" -->
 
