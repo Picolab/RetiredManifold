@@ -70,7 +70,7 @@ angular
 
     return $window.bootbox;
   }])
-  .service('thingsList', function(){
+  .factory('thingsList', function(){
     'use strict';
     var things = [];
 

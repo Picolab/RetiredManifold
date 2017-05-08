@@ -64,74 +64,24 @@
 
 <div class = "container-fluid" ng-controller="MainController">
   <div class = "row">
-    <div class = "col-md-4" ng-drop = "true">
+    <div class = "col-md-4" ng-drop = "true" ng-repeat="thing in things">
       
-      <tabset ng-repeat="thing in things" panel-tabs="true" panel-class="panel-inverse" heading={{thing.name}} ng-drag="true">
-	<tab heading="Journal">
-	  <p>Jan 20 2016: Purchased at Taylor's Bike Shop</p>
-          <p>Jul 25 2016: Semi-annual tune-up at Taylor's Bike Shop</p>
+      <tabset  panel-tabs="true" panel-class="panel-inverse" heading={{thing.name}} ng-drag="true">
+	<tab heading="Info">
+	  <p>ECI: {{thing.eci}}</p>
+          <p>More info: ...</p>
 	</tab>
 	<tab heading="Communities">
 	  <p>Home</p>
 	  <p>Transportation</p>
 	  <p>Valuables</p>
 	</tab>
-	<tab heading="Scheduled">
-	  <p>Jan 25 2016: tune-up reminder</p>
-	</tab>
-      </tabset>
-      
-      <tabset panel-tabs="true" panel-class="panel-inverse" heading="My iPhone 6" ng-drag="true">
 	<tab heading="Journal">
-	  <p>Feb 1 2016: Purchased at Apple Store</p>
-	</tab>
-	<tab heading="Communities">
-	  <p>Home</p>
-	  <p>Electronics</p>
-	  <p>Valuables</p>
-	</tab>
-	<tab heading="Apps">
-	  <p><a href = "#/">Locate</a></p>
+	  <p>Jan 25 2016: tune-up reminder</p>
 	</tab>
       </tabset>
 
     </div><!-- end div class "col-md-4" (first column of panels) -->
-    <div class = "col-md-4" ng-drop = "true">
-      
-      <tabset panel-tabs="true" panel-class="panel-inverse" heading="Furnace" ng-drag="true">
-	<tab heading="Journal">
-	  <p>Jan 20 2016: Replaced filter</p>
-          <p>Mar 14 2016: Replaced filter</p>
-          <p>Sep 17 2016: Replaced filter</p>
-	</tab>
-	<tab heading="Communities">
-	  <p>Home</p>
-	</tab>
-	<tab heading="Apps">
-	  <p><a href = "#/">Purchase filters (Amazon)</a></p>
-	</tab>
-      </tabset>
-
-    </div><!-- end div class "col-md-4" (second column of panels) -->
-    <div class = "col-md-4" ng-drop = "true">
-      
-      <tabset panel-tabs="true" panel-class="panel-inverse" heading="Speaker System" ng-drag="true">
-	<tab heading="Journal">
-	  <p>Sep 21 2016: Purchased at Best Buy</p>
-	</tab>
-	<tab heading="Communities">
-	  <p>Home</p>
-	  <p>Electronics</p>
-	  <p>Valuables</p>
-	</tab>
-	<tab heading="Apps">
-	  <p><a href = "#/">Turn on</a></p>
-	  <p><a href = "#/">Turn off</a></p>
-	  <p><a href = "#/">Mute</a></p>
-	</tab>
-      </tabset>
-
-    </div><!-- end div class "col-md-4" (third column of panels) -->
   
   </div><!-- end div class "row" -->
 </div><!-- end div class "container-fluid" -->
