@@ -46,12 +46,13 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
     $scope.thingsList = thingsList;//necessary for the watch
     $scope.$watch('thingsList.getThings()', function(newValue){//detect when the value in the service changes
       $scope.things = newValue;
+      console.log("Got here2!", $scope.things);
     });
 
     $scope.storageWatcher = sessionStorage;//necessary for the watch
     $scope.$watch('storageWatcher.getItem(\'things\')', function(newValue){//detect changes in the session storage
       thingsList.updateThings();
-      console.log("Got here!");
+      console.log("Got here!", $scope.things);
     });
 
     var asyncCallback = function(){//this callback ensures the "thing" objects appear when first authorized and when things are added
@@ -76,10 +77,22 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
             $modalInstance.dismiss('cancel'); 
           };
           $scope.add = function() {
-            console.log("name",$scope.name);
+            var nameExists = function(){
+              var things = thingsList.getThings();//we can't just call mainController's $scope.things, because we are using a different controller here.
+              for(var i = 0; i < things.length; i++){
+                if(things[i].name === $scope.name){
+                  return true;
+                }
+              }
+              return false;
+            };
             if($scope.name !== undefined && $scope.name !== ""){
-              manifold.createThing($scope.name, asyncCallback);
-              $modalInstance.dismiss('cancel'); 
+              if(!nameExists()){
+                manifold.createThing($scope.name, asyncCallback);
+                $modalInstance.dismiss('cancel'); 
+              }else{
+                alert("Name already exists!");
+              }
             }else{
               alert("No name!");
             }

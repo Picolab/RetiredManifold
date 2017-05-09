@@ -11,15 +11,15 @@ angular
       separator: true
     }, {
        label: 'Things',
-       iconClasses: 'glyphicon glyphicon-cog',
+       iconClasses: 'glyphicon glyphicon-home',
        url: '#/',
      },  {
        label: 'Communities',
-       iconClasses: 'glyphicon glyphicon-cog',
+       iconClasses: 'glyphicon glyphicon-globe',
        url: '#/communities'
      }, {
       label: 'Dashboard',
-      iconClasses: 'glyphicon glyphicon-home',
+      iconClasses: 'glyphicon glyphicon-cog',
       url: '#/dashboard'
     }, {
       label: 'Layouts',
