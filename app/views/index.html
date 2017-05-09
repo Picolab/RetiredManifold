@@ -24,7 +24,6 @@
                   <li><a href="#">Separated link</a></li>
                 </ul>
             </div>
-            
         </div>
     </div>
 </div>
@@ -51,7 +50,16 @@
     </form>
 </script>
 
+<style>
+.myTab {
+  padding: 100px 0;
+  text-align: center;
+}
+</style>
 
+<div ng-hide="things.length > 0" class="myTab">
+  Press the Add button to create a new Thing!
+</div>
 
 <div class = "container-fluid">
   <div class = "row">
