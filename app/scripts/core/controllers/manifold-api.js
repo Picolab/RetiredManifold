@@ -16,6 +16,16 @@
 		}
 	};
 
+	manifold.deleteThing = function(name, callback){
+		if(typeof name === "string"){
+			var eventAttrs = {'pico_name': name};
+			var updateCallback = function(){
+				manifold.updateSession(callback,true);
+			}
+			wrangler.deleteChild(eventAttrs,updateCallback);
+		}
+	};
+
    /**
 	*  Takes the given callback method and inserts the array of things into it as the sole parameter
 	*  thing object: {

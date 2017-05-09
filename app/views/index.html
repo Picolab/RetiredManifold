@@ -60,9 +60,7 @@
 
 
 
-
-
-<div class = "container-fluid" ng-controller="MainController">
+<div class = "container-fluid">
   <div class = "row">
     <div class = "col-md-4" ng-drop = "true"><!-- 0 for column 0, 3 total columns -->
       
@@ -76,9 +74,11 @@
 	         <p>Transportation</p>
 	         <p>Valuables</p>
 	       </tab>
-	       <tab heading="Journal">
-	         <p>Jan 25 2016: tune-up reminder</p>
-	       </tab>
+         <panel-controls>
+              <button class="button-icon" ng-click="deleteThing(thing.name)"><i class="glyphicon glyphicon-trash"></i></button>
+              <panel-control-colors></panel-control-colors> 
+              <panel-control-collapse></panel-control-collapse>
+         </panel-controls>
       </tabset>
 
     </div><!-- end div class "col-md-4" (first column of panels) -->
@@ -94,9 +94,11 @@
            <p>Transportation</p>
            <p>Valuables</p>
          </tab>
-         <tab heading="Journal">
-           <p>Jan 25 2016: tune-up reminder</p>
-         </tab>
+         <panel-controls>
+              <button class="button-icon" ng-click="deleteThing(thing.name)"><i class="glyphicon glyphicon-trash"></i></button>
+              <panel-control-colors></panel-control-colors> 
+              <panel-control-collapse></panel-control-collapse>
+         </panel-controls>
       </tabset>
     </div>
 
@@ -111,9 +113,11 @@
            <p>Transportation</p>
            <p>Valuables</p>
          </tab>
-         <tab heading="Journal">
-           <p>Jan 25 2016: tune-up reminder</p>
-         </tab>
+         <panel-controls>
+              <button class="button-icon" ng-click="deleteThing(thing.name)"><i class="glyphicon glyphicon-trash"></i></button>
+              <panel-control-colors></panel-control-colors> 
+              <panel-control-collapse></panel-control-collapse>
+         </panel-controls>
       </tabset>
     </div>
   </div><!-- end div class "row" -->

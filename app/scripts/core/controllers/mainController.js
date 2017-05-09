@@ -1,6 +1,6 @@
 angular.module('theme.core.main_controller', ['theme.core.services'])
-  .controller('MainController', ['$scope', '$theme', '$timeout', 'progressLoader', '$location', '$modal', '$cookies', 'thingsList',
-    function($scope, $theme, $timeout, progressLoader, $location, $modal, $cookies, thingsList) {
+  .controller('MainController', ['$scope', '$theme', '$timeout', 'progressLoader', '$location', '$modal', '$cookies', 'thingsList', '$bootbox',
+    function($scope, $theme, $timeout, progressLoader, $location, $modal, $cookies, thingsList, $bootbox) {
     'use strict';
     // $scope.layoutIsSmallScreen = false;
     $scope.layoutFixedHeader = $theme.get('fixedHeader');
@@ -68,6 +68,14 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
     $scope.getLayoutOption = function(key) {
       return $theme.get(key);
     };
+
+    $scope.deleteThing = function(name){
+      $bootbox.confirm('Are you sure you want to delete ' + name + '?', function(result) {
+        if(result){
+          manifold.deleteThing(name, asyncCallback);
+        }
+      });
+    }
 
     $scope.openAddModal = function(size) {
       $modal.open({
