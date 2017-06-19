@@ -20,8 +20,8 @@
         if (!current_client_state) {
             window.localStorage.setItem("manifoldAuth_CLIENT_STATE", client_state.toString());
         }
-        var url = 'https://' + manifoldAuth.login_server +
-        '/oauth/authorize?response_type=code' +
+        var url = 'http://' + manifoldAuth.login_server +
+        '/authorize?response_type=code' +
         '&redirect_uri=' + encodeURIComponent(manifoldAuth.callbackURL + (fragment || "")) +
         '&client_id=' + manifoldAuth.clientKey +
         '&state=' + client_state;
@@ -41,8 +41,8 @@
         if (!current_client_state) {
             window.localStorage.setItem("manifoldAuth_CLIENT_STATE", client_state.toString());
         }
-        var url = 'https://' + manifoldAuth.login_server +
-        '/oauth/authorize/newuser?response_type=code' +
+        var url = 'http://' + manifoldAuth.login_server +
+        '/authorize/newuser?response_type=code' +
         '&redirect_uri=' + encodeURIComponent(manifoldAuth.callbackURL + (fragment || "")) +
         '&client_id=' + manifoldAuth.clientKey +
         '&state=' + client_state;
@@ -63,12 +63,13 @@
         if (typeof (callback) !== 'function') {
             callback = function() { };
         }
-        var url = 'https://' + manifoldAuth.login_server + '/oauth/access_token';
+        var url = 'http://' + manifoldAuth.login_server + '/token';
         var data = {
             "grant_type": "authorization_code",
             "redirect_uri": manifoldAuth.callbackURL,
             "client_id": manifoldAuth.clientKey,
-            "code": code
+            "code": code,
+            "client_secret": manifoldAuth.clientSecret
         };
 
         return $.ajax({
@@ -81,13 +82,12 @@
                 str = JSON.stringify(json, null, 4); // (Optional) beautiful indented output.
                 console.log(str); // Logs output to dev tools console.
                 console.log("Recieved following authorization object from access token request: ", JSON.stringify(json));
-                if (!json.OAUTH_ECI) {
+                if (!json.access_token) {
                     console.error("Received invalid OAUTH_ECI. Not saving session.");
                     callback(json);
                     return;
                 };
                 manifoldAuth.saveSession(json,$cookies);
-                wrangler.saveSession(json);
                 window.localStorage.removeItem("manifoldAuth_CLIENT_STATE");
                 callback(json);
             },
@@ -110,7 +110,6 @@
         console.log("Retrieving session ", TokenValue);
         if (typeof TokenValue !== "undefined") {
             manifoldAuth.defaultECI = TokenValue;
-            wrangler.defaultECI = TokenValue;
         } else {
             manifoldAuth.defaultECI = "none";
         }
@@ -120,13 +119,15 @@
     // ------------------------------------------------------------------------
     manifoldAuth.saveSession = function(token_json,$cookies)
     {
-       var Session_ECI = token_json.OAUTH_ECI;
+       var Session_ECI = token_json.access_token;
        var access_token = token_json.access_token;
        console.log("Saving session for ", Session_ECI);
        manifoldAuth.defaultECI = Session_ECI;
        manifoldAuth.access_token = access_token;
+       $cookies["token_type"] = token_json.token_type;
        $cookies["__SkySessionToken"] = Session_ECI;
        $cookies["access_token"] = access_token;
+       manifold.updateSession();
    };
     // ------------------------------------------------------------------------
     manifoldAuth.removeSession = function(hard_reset,$cookies)
@@ -138,7 +139,6 @@
             $.ajax({
                 type: 'POST',
                 url: reset_url,
-                headers: { 'Kobj-Session': manifoldAuth.defaultECI },
                 success: function(json)
                 {
                     console.log("Hard reset on " + manifoldAuth.login_server + " complete");

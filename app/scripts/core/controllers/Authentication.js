@@ -22,7 +22,7 @@ app.controller('CodeController',
 
     manifoldAuth.getOAuthAccessToken(params.code, params.state, $cookies,function(oauth_payload)
     {
-      if (!oauth_payload.OAUTH_ECI) {
+      if (!oauth_payload.access_token) {
         alert("Authentication failed. We apologize for this inconvenience. Please try again.");
       } else {
              console.log("Authorized");
@@ -30,11 +30,6 @@ app.controller('CodeController',
              $location.search('code', null); // remove code parameter 
              $location.search('state', null); // remove state parameter 
              $scope.$apply() // updated the scope of our changes 
-            /// Devtools.initAccount({}, function(kns_directives){ // bootstraps
-            //  console.log("Received directives from bootstrap.execute: ", kns_directives);
-            //  $.mobile.loading("hide");
-           //   window.location = "index.html";
-           // });
            }
          },
          function(json){

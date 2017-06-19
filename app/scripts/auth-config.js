@@ -9,8 +9,16 @@
     
 
     manifoldAuth.callbackURL = "http://localhost:9000/#/code";
-    manifoldAuth.host = "kibdev.kobj.net"; // change to cs.kobj.net when in production
-    manifoldAuth.login_server = "kibdev.kobj.net"; // change to accounts.kobj.net when in production
+    manifoldAuth.clientSecret = "cj3kdsqfp00037toijvewcybj";//change this to whatever secret is given in oauth_server
+    manifoldAuth.host = "localhost:8080";
+    manifoldAuth.customHost = "none";
+    manifoldAuth.login_server = "localhost:8080";
+
+    manifold.eventPath = "sky/event";
+    manifold.functionPath = "sky/cloud";
+    manifold.defaultHost = "localhost:8080";
+    manifold.customHost = "none";
+
     manifoldAuth.defaultECI = "none";
     manifoldAuth.access_token = "none";
     wrangler.eventPath = "sky/event";
