@@ -3,12 +3,16 @@
 	<div class="panel panel-primary" ng-controller="LoginController">
 		<div class="panel-body">
 			<h4 class="text-center" style="margin-bottom: 25px;">Welcome to Manifold.</h4>
-			
-  			<a id="authorize-link" href="#" data-transition="slide" class="ui-btn ui-corner-all ui-btn-b ui-shadow ui-btn-inline">Authorize with Kynetx</a> <br>
+
+  			<form ng-submit="saveCustomHost()" id="custom-host">
+  				<input type="text" ng-model="customHost" placeholder="Custom Host Here">
+  				<input type="text" ng-model="clientSecret" placeholder="Client Secret Here">
+  				<button type="submit"> Authorize </button>
+  			</form>
 
   			<a id="create-link" href="#" data-transition="slide" class="ui-btn ui-corner-all ui-btn-a ui-shadow ui-btn-inline">Create Kynetx Account</a> <br>
 
   			<a id="account-link" href="#" data-transition="slide" class="ui-btn ui-corner-all ui-btn-a ui-shadow ui-btn-inline">My Kynetx Profile</a>
-                </div>
+        </div>
 	</div>
  </div>

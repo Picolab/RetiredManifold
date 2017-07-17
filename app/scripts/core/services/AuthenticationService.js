@@ -10,8 +10,8 @@ angular.module('Authentication')
         {
             //Oauth
             console.log("plant authorize button");
-            var OAuth_URL = manifoldAuth.getOAuthURL();
-            $('#authorize-link').attr('href', OAuth_URL);
+            //var OAuth_URL = manifoldAuth.getOAuthURL();
+            //$('#authorize-link').attr('href', OAuth_URL);
             var OAuth_kynetx_newuser_URL = manifoldAuth.getOAuthNewAccountURL();
             $('#create-link').attr('href', OAuth_kynetx_newuser_URL);
             

@@ -12,15 +12,13 @@
     // ------------------------------------------------------------------------
     manifoldAuth.getOAuthURL = function(fragment)
     {
-        if (typeof manifoldAuth.login_server === "undefined") {
-            manifoldAuth.login_server = manifoldAuth.host;
-        }
         var current_client_state = window.localStorage.getItem("manifoldAuth_CLIENT_STATE");
         var client_state = current_client_state || Math.floor(Math.random() * 9999999);
         if (!current_client_state) {
             window.localStorage.setItem("manifoldAuth_CLIENT_STATE", client_state.toString());
         }
-        var url = 'http://' + manifoldAuth.login_server +
+        var host = manifoldAuth.customHost;
+        var url = 'http://' + host +
         '/authorize?response_type=code' +
         '&redirect_uri=' + encodeURIComponent(manifoldAuth.callbackURL + (fragment || "")) +
         '&client_id=' + manifoldAuth.clientKey +
@@ -30,18 +28,14 @@
 
     manifoldAuth.getOAuthNewAccountURL = function(fragment)
     {
-        if (typeof manifoldAuth.login_server === "undefined") {
-            manifoldAuth.login_server = manifoldAuth.host;
-        }
-
-
         var current_client_state = window.localStorage.getItem("manifoldAuth_CLIENT_STATE");
         console.log("current_client_state ",current_client_state);
         var client_state = current_client_state || Math.floor(Math.random() * 9999999);
         if (!current_client_state) {
             window.localStorage.setItem("manifoldAuth_CLIENT_STATE", client_state.toString());
         }
-        var url = 'http://' + manifoldAuth.login_server +
+        var host = manifoldAuth.customHost;
+        var url = 'http://' + host +
         '/authorize/newuser?response_type=code' +
         '&redirect_uri=' + encodeURIComponent(manifoldAuth.callbackURL + (fragment || "")) +
         '&client_id=' + manifoldAuth.clientKey +
@@ -63,7 +57,8 @@
         if (typeof (callback) !== 'function') {
             callback = function() { };
         }
-        var url = 'http://' + manifoldAuth.login_server + '/token';
+        var host = manifoldAuth.customHost;
+        var url = 'http://' + host + '/token';
         var data = {
             "grant_type": "authorization_code",
             "redirect_uri": manifoldAuth.callbackURL,
@@ -71,6 +66,7 @@
             "code": code,
             "client_secret": manifoldAuth.clientSecret
         };
+        console.log("This IS Da Data Adam :",data);
 
         return $.ajax({
             type: 'POST',
